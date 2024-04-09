@@ -1,33 +1,43 @@
 
 
+# enum LogLevels
+alias ERROR   = 0
+alias WARNING = 1
+alias INFO    = 2
+alias DEBUG   = 3
 
 struct Logger:
     
+    var _log_level : Int8
     #handlers eventually
 
     fn error(self, value : String):
         print("ERROR: " + value)
 
     fn warning(self, value : String):
-        print(value)
+        if( self._log_level > WARNING ):
+            print(value)
 
     fn info(self, value : String):
-        print(value)
+        if( self._log_level > INFO ):
+            print(value)
 
     fn debug(self, value : String):
-        print("DEBUG: " + value)
+        if( self._log_level > DEBUG ):
+            print(value)
 
+    fn set_log_level(inout self, level : Int8):
+        self._log_level = level
+    
     fn __init__(inout self):
-        pass
+        self._log_level = DEBUG
 
     fn __del__(owned self):
         pass
 
-var default_logger = Logger()
+var default_logger = Logger() 
 # Returns logger Object
 # GetLogger(string)
-
-
 
 fn error(s : String):
     default_logger.error(s)
@@ -42,6 +52,5 @@ fn info(s : String):
 fn debug(s : String):
     default_logger.debug(s)
 
-
-
-
+fn basicConfig(max_log_level : Int8 ):
+    default_logger.set_log_level(DEBUG)

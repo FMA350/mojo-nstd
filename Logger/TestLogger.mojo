@@ -25,9 +25,9 @@ fn advanced_logging():
 
 fn simple_logging():
     logging.debug('This will get logged')    
-    # logging.basicConfig(level=logging.info)
-    # logging.error('An error that will get logged')
-    # logging.debug('This will NOT get logged')
+    logging.basicConfig(logging.INFO)
+    logging.error('An error that will get logged')
+    logging.debug('This will NOT get logged')
 
 fn main() -> None:
     simple_logging()
